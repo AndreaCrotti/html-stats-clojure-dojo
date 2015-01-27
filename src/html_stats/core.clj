@@ -3,10 +3,15 @@
             [net.cgrand.enlive-html :as html]
             [clojure.zip :as z]))
 
+(defn fetch-url [url]
+  (html/html-resource (java.net.URL. url)))
 
-(defn parse-html-file []
+#_(defn parse-html-file []
   (with-open [re (io/reader "test/html_stats/sample.html")]
     (html/html-resource re)))
+
+(defn parse-html-file []
+  (fetch-url "http://www.bbc.co.uk/news"))
 
 (defn has-children [node] (and (map? node) (contains? node :content)))
 
